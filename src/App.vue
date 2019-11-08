@@ -1,17 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-if="!isLoggedIn">
+      <Start v-on:loggedIn="isLoggedIn = true" />
+    </div>
+    <div v-else>
+
+      <Home :currentUser="user"/>
+      <router-view></router-view>
+    </div>
+    <footer>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/HLXdl1XdgF4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Start from './views/Start.vue';
+import Home from './views/Home.vue';
+import {joep} from './lib/dummyUser';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Start,
+    Home
+  },
+  data() {
+    return {
+      isLoggedIn: false,
+      user: {}
+    }
+  },
+  created() {
+    this.user = joep
   }
 }
 </script>
@@ -23,6 +44,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
+}
+
+footer {
+  margin-top: 50px;
 }
 </style>
