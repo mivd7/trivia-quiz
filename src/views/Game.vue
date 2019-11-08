@@ -18,6 +18,7 @@ export default {
     methods: {
         ...mapActions(["fetchAllCategories"])
     },
+
     created() {
         this.fetchAllCategories();
     },
