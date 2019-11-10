@@ -4,7 +4,6 @@
       <Start v-on:loggedIn="isLoggedIn = true" />
     </div>
     <div v-else>
-
       <Home :currentUser="user"/>
       <router-view></router-view>
     </div>
