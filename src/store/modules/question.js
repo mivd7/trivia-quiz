@@ -32,7 +32,7 @@ const actions = {
         commit('setAnswers')
     },
     finalResult({ commit }, user) {
-      commit('checkQuizResult')
+      commit('checkQuizResult', user)
     }
 }
   
@@ -53,7 +53,13 @@ const mutations = {
           return;
         }
     },
-    setQuizResult: (state, )
+    setQuizResult: (state, user) => {
+      if(state.correctAmount === 10) {
+        user.level += 1
+      } else {
+        return;
+      }
+    },
     setNextQuestion: (state) => state.question = state.questions.shift(),
 }
   
