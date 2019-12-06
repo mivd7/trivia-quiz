@@ -1,6 +1,8 @@
 <template>
     <div>
     <div v-if="allQuestions.length > 0">
+
+        <p>The category is...<br> {{currentQuestion.category}}</p>
         <h3>{{currentQuestion.question}}</h3>
         <ol type="a">
             <li @click="e => handleClick(answer)" v-for="answer in allAnswers" :key="allAnswers.indexOf(answer)">{{answer}}</li>

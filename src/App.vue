@@ -7,9 +7,6 @@
       <Home :currentUser="user"/>
       <router-view></router-view>
     </div>
-    <footer>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/HLXdl1XdgF4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </footer>
   </div>
 </template>
 
@@ -26,7 +23,7 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: false,
+      isLoggedIn: true,
       user: {}
     }
   },

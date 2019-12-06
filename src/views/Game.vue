@@ -1,7 +1,6 @@
 <template>
   <div>
     <h2>Level {{$route.params.level}}</h2>
-    <p>The category is...<br> {{randomCategory.name}}</p>
     <Questions v-if="randomCategory" :categoryId="randomCategory.id"/>
    </div> 
 </template>
