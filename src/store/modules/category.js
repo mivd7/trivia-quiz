@@ -15,7 +15,7 @@ const actions = {
         commit('categoryCompleted', id)
     },
     async fetchAllCategories({ commit }) {
-        const response = await axios.get(`https://opentdb.com/api_category.php`);
+        const response = await axios.get(`https://opentdb.com/api_category.php?encode=url3986`);
         commit('setCategories', response.data.trivia_categories)
     },
 }
