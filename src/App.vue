@@ -4,7 +4,7 @@
       <Start v-on:loggedIn="isLoggedIn = true" />
     </div>
     <div v-else>
-      <Home :showPathway="showPathway" :currentUser="user"/>
+      <Home :showPathway="showPathway" :currentUser="currentUser"/>
       <router-view></router-view>
     </div>
   </div>
@@ -13,7 +13,7 @@
 <script>
 import Start from './views/Start.vue';
 import Home from './views/Home.vue';
-import {joep} from './lib/dummyUser';
+import {mapGetters} from 'vuex';
 
 export default {
   name: 'app',
@@ -23,21 +23,13 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: false,
-      user: {},
+      isLoggedIn: true,
       showPathway: null
     }
   },
-  created() {
-    this.user = joep
+  computed: {
+    ...mapGetters(["currentUser"])
   },
-  mounted() {
-    this.$root.$on('showPathway', (value) => {
-          //eslint-disable-next-line
-          console.log(value);
-          this.showPathway = value;
-    })
-  }
 }
 </script>
 

@@ -48,7 +48,7 @@ export default {
             }
         },
         reset() {
-            if(this.correctAnswerAmount >= 10) {
+            if(this.correctAnswerAmount >= 1) {
                 this.levelUp()
             }
             this.$emit('quizDone')
