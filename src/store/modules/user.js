@@ -7,7 +7,7 @@ const state = {
         lives: 5,
         coins: 1000,
         loggedIn: false
-    }
+    },
 };
   
 const getters = {

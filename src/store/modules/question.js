@@ -5,14 +5,16 @@ const state = {
     questions: [],
     question: {},
     answers: [],
-    correctAnswer: ''
+    correctAnswer: '',
+    previousCorrectAnswer: ''
 };
   
 const getters = {
     allQuestions: state => state.questions,
     currentQuestion: state => state.question,
     allAnswers: state => state.answers,
-    correctAnswer: state => state.correctAnswer
+    correctAnswer: state => state.correctAnswer,
+    previousCorrectAnswer: state => state.previousCorrectAnswer
 }
 
 const actions = {
@@ -29,15 +31,23 @@ const actions = {
   
 const mutations = {
     setQuestions: (state, questions) => (
+        state.previousCorrectAnswer = state.question.correct_answer,
         state.questions = questions,
         state.question = questions.shift()
     ),
-    setAnswers: (state) => (
+    setAnswers: (state) => {
+      if (state.questions.length > 0) {
         state.question.incorrect_answers.push(state.question.correct_answer),
         state.answers = shuffle(state.question.incorrect_answers),
         state.correctAnswer = state.question.correct_answer
-    ),
-    setNextQuestion: (state) => state.question = state.questions.shift()
+      } else {
+        state.question = {}
+      }
+    },
+    setNextQuestion: (state) => {
+      state.question = state.questions.shift(),
+      state.previousCorrectAnswer = state.question.correct_answer
+    }
 }
   
 export default {

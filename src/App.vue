@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: false,
+      isLoggedIn: true,
       showPathway: null
     }
   },

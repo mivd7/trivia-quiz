@@ -3,7 +3,7 @@
   <div>
     <TopBar :currentUser="currentUser"/>
     <h1>{{currentUser.name}}, do you have the answers?</h1>
-    <div class="pathway">
+    <div v-if="!gameInProgress" class="pathway">
         <svg width="760" height="850" xmlns="http://www.w3.org/2000/svg">
             <path d="M 320 40 Q 40 210, 320 380 T 320 800" stroke="black" stroke-width="5" fill="transparent"/>
             <!-- Points -->
@@ -43,7 +43,7 @@
             <text x="320" y="805" 
             text-anchor="middle"
             stroke="white"
-            stroke-width="1px" >
+            stroke-width="1px" @click="handleClick">
             <router-link :to="'/game/' + currentUser.level">{{ currentUser.level }}</router-link>
             <router-view></router-view> </text>
         </svg>
@@ -54,6 +54,7 @@
 <script>
 /* eslint-disable */
 import TopBar from '../components/TopBar';
+import {mapGetters, mapActions} from 'vuex';
 
 export default {
     name: 'Home',
@@ -68,6 +69,27 @@ export default {
     components: {
         TopBar
     },
+    data() {
+      return {
+        quizRunning: false
+      }
+    },
+    methods: {
+      ...mapActions(['startGame']),
+      handleClick() {
+        console.log('starting game...')
+        this.startGame()
+      }
+    },
+    computed: {
+       ...mapGetters(["gameInProgress"])
+    },
+    watch: {
+      gameInProgress: function(newVal, oldVal) {
+        console.log(newVal)
+        this.quizRunning = newVal
+      }
+    }
 }
 </script>
 

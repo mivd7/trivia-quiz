@@ -37,28 +37,29 @@ export default {
         ...mapActions(["fetchQuestionsByCategory","nextQuestion","setCorrectAnswer","setWrongAnswer","levelUp"]),
         handleClick(answer) {
             const correct = checkAnswer(answer, this.correctAnswer)
+            
             if (correct) {
               this.isCorrect = true;
               this.setCorrectAnswer(this.currentQuestion)
-              setTimeout(this.nextQuestion(), 1000);
+              this.nextQuestion();
             } else {
               this.isCorrect = false;
               this.setWrongAnswer(this.currentQuestion)
-              setTimeout(this.nextQuestion(), 1000);
+              this.nextQuestion();
             }
         },
         reset() {
             if(this.correctAnswerAmount >= 1) {
                 this.levelUp()
             }
-            this.$emit('quizDone')
+            this.$emit('quizCompleted')
         }
     },
     created() {
         this.fetchQuestionsByCategory(this.categoryId);
     },
     computed: {
-        ...mapGetters(["allQuestions","allAnswers","currentQuestion","correctAnswer","correctAnswerAmount"])
+        ...mapGetters(["allQuestions","allAnswers","currentQuestion","correctAnswer","previousCorrectAnswer","correctAnswerAmount"])
     },  
 }
 </script>
