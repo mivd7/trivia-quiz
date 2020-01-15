@@ -35,7 +35,7 @@ const mutations = {
             state.user.loggedIn = true
         }
     },
-    nextLevel: state => state.user.level += 1,
+    nextLevel: state => state.user.level++,
     coinsAdded: (state, amount) => state.user.coins += amount,
     livesAdded: (state, amount) => state.user.lives += amount
 }

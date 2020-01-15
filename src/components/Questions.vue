@@ -10,7 +10,9 @@
             <p v-if="isCorrect === false">Wrong! The correct answer was {{previousCorrectAnswer}}</p>
         </ol>
     </div>
-    <div v-else>ALL DONE HERE! <router-link to="/home"><button @click="reset">go back</button></router-link></div>
+    <div v-else>ALL DONE HERE! <router-link to="/home"><br/>
+    <p>You answered {{correctAnswerAmount}} / 10 questions correctly</p>
+    <button @click="reset">go back</button></router-link></div>
     </div>
 </template>
 
@@ -29,34 +31,35 @@ export default {
     data() {
       return {
         isCorrect: null,
-        previousCorrectAnswer: '',
       }
     },
     methods: {
-        ...mapActions(["fetchQuestionsByCategory","nextQuestion"]),
+        ...mapActions(["fetchQuestionsByCategory","nextQuestion","setCorrectAnswer","setWrongAnswer","levelUp"]),
         handleClick(answer) {
             const correct = checkAnswer(answer, this.correctAnswer)
             if (correct) {
               this.isCorrect = true;
+              this.setCorrectAnswer(this.currentQuestion)
               setTimeout(this.nextQuestion(), 1000);
             } else {
               this.isCorrect = false;
+              this.setWrongAnswer(this.currentQuestion)
               setTimeout(this.nextQuestion(), 1000);
             }
         },
+        reset() {
+            if(this.correctAnswerAmount >= 10) {
+                this.levelUp()
+            }
+            this.$emit('quizDone')
+        }
     },
     created() {
         this.fetchQuestionsByCategory(this.categoryId);
     },
     computed: {
-        ...mapGetters(["allQuestions","allAnswers","currentQuestion","correctAnswer"])
-    },
-    watch: {
-        currentQuestion: function(newVal, oldVal) {
-            this.previousCorrectAnswer = oldVal.correct_answer;
-        },
-    }
-    
+        ...mapGetters(["allQuestions","allAnswers","currentQuestion","correctAnswer","correctAnswerAmount"])
+    },  
 }
 </script>
 
