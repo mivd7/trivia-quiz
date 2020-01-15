@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <div v-if="!isLoggedIn">
-      <Start v-on:loggedIn="isLoggedIn = true" />
+      <h1>Welcome to Trivia Kings! Please login</h1>
+      <Login v-on:loginSuccesful="isLoggedIn = true" />
     </div>
     <div v-else>
       <Home :showPathway="showPathway" :currentUser="currentUser"/>
@@ -11,19 +12,19 @@
 </template>
 
 <script>
-import Start from './views/Start.vue';
+import Login from './views/Login.vue';
 import Home from './views/Home.vue';
 import {mapGetters} from 'vuex';
 
 export default {
   name: 'app',
   components: {
-    Start,
+    Login,
     Home
   },
   data() {
     return {
-      isLoggedIn: true,
+      isLoggedIn: false,
       showPathway: null
     }
   },

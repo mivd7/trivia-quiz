@@ -2,7 +2,7 @@
 <template>
   <div>
     <TopBar :currentUser="currentUser"/>
-    <h1>Do you have the answers?</h1>
+    <h1>{{currentUser.name}}, do you have the answers?</h1>
     <div class="pathway">
         <svg width="760" height="850" xmlns="http://www.w3.org/2000/svg">
             <path d="M 320 40 Q 40 210, 320 380 T 320 800" stroke="black" stroke-width="5" fill="transparent"/>
