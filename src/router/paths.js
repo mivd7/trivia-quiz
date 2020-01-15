@@ -3,7 +3,7 @@ import Game from '../views/Game';
 
 export default [
 	{
-		path: "/",
+		path: "/home",
 		// meta: {},
 		name: "Home",
 		component: Home

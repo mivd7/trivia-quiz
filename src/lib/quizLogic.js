@@ -8,12 +8,9 @@ export function shuffle(a) {
 }
 
 export function checkAnswer(answer, correctAnswer) {
-  console.log(answer, correctAnswer)
   if(answer == correctAnswer) {
-    console.log('Correct!')
     return true;
   } else {
-    console.log('Wrong answer!')
     return false;
   }
 }

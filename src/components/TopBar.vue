@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    name: 'Home',
+    name: 'TopBar',
     props: {
         currentUser: {
             type: Object,

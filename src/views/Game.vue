@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Level {{$route.params.level}}</h2>
-    <Questions v-if="randomCategory" :categoryId="randomCategory.id"/>
+    <Questions v-if="randomCategory && gameInProgress" :categoryId="randomCategory.id" v-on:quizCompleted="reset"/>
    </div> 
 </template>
 
@@ -15,10 +15,21 @@ export default {
         Questions
     },
     methods: {
-        ...mapActions(["fetchAllCategories"])
+        ...mapActions(["fetchAllCategories"]),
+        reset() {
+            this.gameInProgress = false
+            this.$root.$emit('showPathway', true)
+        }
+    },
+    data() {
+        return {
+            gameInProgress: false
+        }
     },
     created() {
         this.fetchAllCategories();
+        this.gameInProgress = true;
+        this.$root.$emit('showPathway', false)
     },
     computed: {
         ...mapGetters(["randomCategory"])

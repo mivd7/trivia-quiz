@@ -7,16 +7,16 @@
         <ol type="a">
             <li @click="e => handleClick(answer)" v-for="answer in allAnswers" :key="allAnswers.indexOf(answer)">{{answer}}</li>
             <p v-if="isCorrect === true">Correct!</p>
-            <p v-if="isCorrect === false">wrong!</p>
+            <p v-if="isCorrect === false">Wrong! The correct answer was {{previousCorrectAnswer}}</p>
         </ol>
     </div>
-    <div v-else>ALL DONE HERE <router-link to="/">go back</router-link> </div>
+    <div v-else>ALL DONE HERE! <router-link to="/home"><button @click="reset">go back</button></router-link></div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import {checkAnswer} from '../lib/quizLogic'
+import { checkAnswer } from '../lib/quizLogic'
 
 export default {
     name: 'Questions',
@@ -29,6 +29,7 @@ export default {
     data() {
       return {
         isCorrect: null,
+        previousCorrectAnswer: '',
       }
     },
     methods: {
@@ -37,12 +38,12 @@ export default {
             const correct = checkAnswer(answer, this.correctAnswer)
             if (correct) {
               this.isCorrect = true;
-              setTimeout(this.nextQuestion(), 5000);
+              setTimeout(this.nextQuestion(), 1000);
             } else {
               this.isCorrect = false;
-              setTimeout(this.nextQuestion(), 5000);
+              setTimeout(this.nextQuestion(), 1000);
             }
-        }
+        },
     },
     created() {
         this.fetchQuestionsByCategory(this.categoryId);
@@ -50,6 +51,11 @@ export default {
     computed: {
         ...mapGetters(["allQuestions","allAnswers","currentQuestion","correctAnswer"])
     },
+    watch: {
+        currentQuestion: function(newVal, oldVal) {
+            this.previousCorrectAnswer = oldVal.correct_answer;
+        },
+    }
     
 }
 </script>

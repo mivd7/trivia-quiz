@@ -4,7 +4,7 @@
       <Start v-on:loggedIn="isLoggedIn = true" />
     </div>
     <div v-else>
-      <Home :currentUser="user"/>
+      <Home :showPathway="showPathway" :currentUser="user"/>
       <router-view></router-view>
     </div>
   </div>
@@ -23,12 +23,20 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: true,
-      user: {}
+      isLoggedIn: false,
+      user: {},
+      showPathway: null
     }
   },
   created() {
     this.user = joep
+  },
+  mounted() {
+    this.$root.$on('showPathway', (value) => {
+          //eslint-disable-next-line
+          console.log(value);
+          this.showPathway = value;
+    })
   }
 }
 </script>
