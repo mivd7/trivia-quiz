@@ -21,7 +21,6 @@ export default {
         }
     },
     created() {
-        // this.startGame()
         this.fetchAllCategories();
     },
     computed: {

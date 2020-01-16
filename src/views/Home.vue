@@ -62,17 +62,9 @@ export default {
         currentUser: {
             type: Object,
         },
-        showPathway: {
-            type: Boolean
-        }
     },
     components: {
         TopBar
-    },
-    data() {
-      return {
-        quizRunning: false
-      }
     },
     methods: {
       ...mapActions(['startGame']),
@@ -84,12 +76,6 @@ export default {
     computed: {
        ...mapGetters(["gameInProgress"])
     },
-    watch: {
-      gameInProgress: function(newVal, oldVal) {
-        console.log(newVal)
-        this.quizRunning = newVal
-      }
-    }
 }
 </script>
 

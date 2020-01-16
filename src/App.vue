@@ -5,7 +5,7 @@
       <Login v-on:loginSuccesful="isLoggedIn = true" />
     </div>
     <div v-else>
-      <Home :showPathway="showPathway" :currentUser="currentUser"/>
+      <Home :currentUser="currentUser"/>
       <router-view></router-view>
     </div>
   </div>
@@ -24,8 +24,7 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: true,
-      showPathway: null
+      isLoggedIn: false,
     }
   },
   computed: {

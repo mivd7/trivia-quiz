@@ -49,7 +49,7 @@ export default {
             }
         },
         reset() {
-            if(this.correctAnswerAmount >= 1) {
+            if(this.correctAnswerAmount >= 10) {
                 this.levelUp()
             }
             this.$emit('quizCompleted')
